@@ -10,20 +10,8 @@
             text-align: center;
             color: white;
 
-            /* фон */
             background: url("background.jpg") no-repeat center center fixed;
             background-size: cover;
-        }
-
-        /* затемнение, чтобы текст читался */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0,0,0,0.6);
-            z-index: 0;
         }
 
         h1 {
@@ -85,8 +73,6 @@
 
 <body>
 
-<div class="overlay"></div>
-
 <h1>ЧИТЫ В БРАВЛ СТАРС БЕСПЛАТНО!</h1>
 
 <div class="buttons">
@@ -108,25 +94,24 @@ function start() {
 
     document.documentElement.requestFullscreen?.();
 
-    // СРАЗУ показываем скример
     img.src = "konina.jpg";
     img.style.display = "block";
 
-    // звук сразу
     sound.currentTime = 0;
     sound.play();
 
-    // лёгкое "пульсирующее" мерцание (без жёсткого строба)
     let on = false;
     let interval = setInterval(() => {
         flash.style.opacity = on ? "0.35" : "0";
         on = !on;
     }, 180);
 
-    // остановка эффекта
     setTimeout(() => {
         clearInterval(interval);
         flash.style.opacity = "0";
     }, 2000);
 }
 </script>
+
+</body>
+</html>
