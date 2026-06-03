@@ -49,17 +49,36 @@
             z-index: 2000;
             pointer-events: none;
         }
+
+        /* ЕБАНУТАЯ ТРЯСКА */
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-15px, 8px); }
+            20% { transform: translate(12px, -10px); }
+            30% { transform: translate(-8px, 12px); }
+            40% { transform: translate(15px, -8px); }
+            50% { transform: translate(-12px, 10px); }
+            60% { transform: translate(8px, -12px); }
+            70% { transform: translate(-15px, 5px); }
+            80% { transform: translate(10px, -8px); }
+            90% { transform: translate(-8px, 8px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .shaking {
+            animation: shake 0.08s infinite linear;
+        }
     </style>
 </head>
 <body>
-    <h1>ЧИТЫ В БРАВЛ СТАРС БЕСПЛАТНО СУКА!</h1>
+    <h1>ЧИТЫ В БРАВЛ СТАРС БЕСПЛАТНО!!!</h1>
     <div>
-        <button class="btn1" onclick="start()">СКАЧАТЬ НАХУЙ</button>
-        <button class="btn2" onclick="start()">ВЫЙТИ ИЗ ИГРЫ</button>
+        <button class="btn1" onclick="start()">СКАЧАТЬ</button>
+        <button class="btn2" onclick="start()">НЕ</button>
     </div>
 
     <audio id="sound" src="konik.mp3" preload="auto"></audio>
-    <img id="img" src="konina.jpg">
+    <img id="img" src="konina.jpg" class="shaking">
     <div id="flash"></div>
 
 <script>
@@ -85,8 +104,8 @@ function start() {
             img.style.opacity = "1";
             flash.style.background = "transparent";
         } 
-        else if (phase % 4 === 1) {      // БЕЛЫЙ
-            img.style.opacity = "0.3";
+        else if (phase % 4 === 1) {      // БЕЛЫЙ ВСПЫШКА
+            img.style.opacity = "0.25";
             flash.style.background = "white";
         } 
         else if (phase % 4 === 2) {      // картинка
@@ -97,14 +116,18 @@ function start() {
             img.style.opacity = "0.2";
             flash.style.background = "black";
         }
-    }, 70); // скорость мигания, чем меньше — тем быстрее
+    }, 45); // ← теперь ОЧЕНЬ быстро, сука
 
-    // Авто-вырубка через 8 секунд чтобы не сдох совсем
+    // Тряска ещё сильнее
+    img.classList.add("shaking");
+
+    // Вырубаем весь этот пиздец через 7 секунд
     setTimeout(() => {
         clearInterval(strobe);
+        img.classList.remove("shaking");
         flash.style.background = "transparent";
         img.style.opacity = "1";
-    }, 8000);
+    }, 70000);
 }
 </script>
 </body>
