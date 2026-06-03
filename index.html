@@ -2,45 +2,38 @@
 <html>
 <head>
     <title>читы бравл старс</title>
-
     <style>
         body {
             margin: 0;
             font-family: Arial;
             text-align: center;
             color: white;
-
             background: url("background.jpg") no-repeat center center fixed;
             background-size: cover;
+            overflow: hidden;
         }
-
         h1 {
             font-size: 60px;
             margin-top: 120px;
-            position: relative;
-            z-index: 1;
+            text-shadow: 0 0 20px red, 0 0 40px red;
         }
-
         .buttons {
-            position: relative;
-            z-index: 1;
             margin-top: 40px;
         }
-
         button {
-            font-size: 25px;
-            padding: 15px 30px;
-            margin: 10px;
+            font-size: 28px;
+            padding: 18px 40px;
+            margin: 12px;
             border: none;
             cursor: pointer;
-            border-radius: 10px;
+            border-radius: 12px;
+            font-weight: bold;
         }
-
         .btn1 {
-            background: red;
+            background: linear-gradient(#ff0000, #aa0000);
             color: white;
+            box-shadow: 0 0 20px red;
         }
-
         .btn2 {
             background: black;
             color: white;
@@ -48,75 +41,57 @@
 
         #img {
             display: none;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
             position: fixed;
             top: 0;
             left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
             z-index: 1000;
+            animation: flicker 0.08s infinite alternate;
         }
 
-        /* 🔥 мигание */
         @keyframes flicker {
-            0% { opacity: 1; }
-            10% { opacity: 0.2; }
-            20% { opacity: 1; }
-            30% { opacity: 0.3; }
-            40% { opacity: 1; }
-            50% { opacity: 0.1; }
-            60% { opacity: 1; }
-            70% { opacity: 0.4; }
-            80% { opacity: 1; }
-            90% { opacity: 0.2; }
-            100% { opacity: 1; }
+            0%   { opacity: 1; }
+            10%  { opacity: 0.15; }
+            20%  { opacity: 0.9; }
+            35%  { opacity: 0.1; }
+            50%  { opacity: 0.85; }
+            65%  { opacity: 0.2; }
+            80%  { opacity: 0.95; }
+            100% { opacity: 0.3; }
         }
     </style>
 </head>
-
 <body>
+    <h1>ЧИТЫ В БРАВЛ СТАРС БЕСПЛАТНО!</h1>
+    <div class="buttons">
+        <button class="btn1" onclick="start()">Скачать</button>
+        <button class="btn2" onclick="start()">Нет спасибо</button>
+    </div>
 
-<h1>ЧИТЫ В БРАВЛ СТАРС БЕСПЛАТНО!</h1>
-
-<div class="buttons">
-    <button class="btn1" onclick="start()">Скачать</button>
-    <button class="btn2" onclick="start()">Выйти</button>
-</div>
-
-<audio id="sound" src="konik.mp3" preload="auto"></audio>
-
-<img id="img">
+    <audio id="sound" src="konik.mp3" preload="auto"></audio>
+    <img id="img" src="konina.jpg">
 
 <script>
 function start() {
     const sound = document.getElementById("sound");
     const img = document.getElementById("img");
 
+    // Полноэкранный режим, сука
     document.documentElement.requestFullscreen?.();
 
-    img.src = "konina.jpg";
     img.style.display = "block";
-    img.style.opacity = "1";
-
+    
+    // Перезапускаем звук
     sound.currentTime = 0;
-    sound.play();
+    sound.play().catch(() => {});
 
-    let count = 0;
-    let visible = true;
-
-    const interval = setInterval(() => {
-        img.style.opacity = visible ? "0.2" : "1";
-        visible = !visible;
-
-        count++;
-
-        if (count > 14) { // ~2 секунды
-            clearInterval(interval);
-            img.style.opacity = "1";
-        }
-    }, 80);
+    // Через 3 секунды можно вырубить если хочешь, но пусть бесит
+    setTimeout(() => {
+        img.style.animation = "flicker 0.05s infinite alternate";
+    }, 300);
 }
 </script>
-
 </body>
 </html>
