@@ -96,12 +96,25 @@ function start() {
 
     img.src = "konina.jpg";
     img.style.display = "block";
-
-    // запускаем мигание
-    img.style.animation = "flicker 0.3s linear 6";
+    img.style.opacity = "1";
 
     sound.currentTime = 0;
     sound.play();
+
+    let count = 0;
+    let visible = true;
+
+    const interval = setInterval(() => {
+        img.style.opacity = visible ? "0.2" : "1";
+        visible = !visible;
+
+        count++;
+
+        if (count > 14) { // ~2 секунды
+            clearInterval(interval);
+            img.style.opacity = "1";
+        }
+    }, 80);
 }
 </script>
 
