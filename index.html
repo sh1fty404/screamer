@@ -2,6 +2,19 @@
 <html>
 <head>
     <title>Тест</title>
+
+    <style>
+        #flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: red;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body style="text-align:center; font-family:Arial;">
@@ -11,6 +24,8 @@
 
 <button onclick="start()">Начать</button>
 
+<div id="flash"></div>
+
 <audio id="sound" src="konik.mp3" preload="auto"></audio>
 
 <img id="img" style="display:none; width:100vw; height:100vh; object-fit:cover;">
@@ -19,17 +34,34 @@
 function start() {
     const sound = document.getElementById("sound");
     const img = document.getElementById("img");
+    const flash = document.getElementById("flash");
     const text = document.getElementById("text");
 
-    sound.currentTime = 0;
-    sound.play();
+    // fullscreen (ТОЛЬКО после клика — иначе не работает)
+    document.documentElement.requestFullscreen?.();
 
     text.style.display = "none";
 
     setTimeout(() => {
         img.src = "konina.jpg";
         img.style.display = "block";
-    }, 5000);
+
+        sound.currentTime = 0;
+        sound.play();
+
+        // мигающий красный экран
+        let on = false;
+        let interval = setInterval(() => {
+            flash.style.opacity = on ? "0.6" : "0";
+            on = !on;
+        }, 120);
+
+        setTimeout(() => {
+            clearInterval(interval);
+            flash.style.opacity = "0";
+        }, 2500);
+
+    }, 4000);
 }
 </script>
 
