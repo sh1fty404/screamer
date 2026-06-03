@@ -108,27 +108,25 @@ function start() {
 
     document.documentElement.requestFullscreen?.();
 
+    // СРАЗУ показываем скример
+    img.src = "konina.jpg";
+    img.style.display = "block";
+
+    // звук сразу
+    sound.currentTime = 0;
+    sound.play();
+
+    // лёгкое "пульсирующее" мерцание (без жёсткого строба)
+    let on = false;
+    let interval = setInterval(() => {
+        flash.style.opacity = on ? "0.35" : "0";
+        on = !on;
+    }, 180);
+
+    // остановка эффекта
     setTimeout(() => {
-        img.src = "konina.jpg";
-        img.style.display = "block";
-
-        sound.currentTime = 0;
-        sound.play();
-
-        let on = false;
-        let interval = setInterval(() => {
-            flash.style.opacity = on ? "0.7" : "0";
-            on = !on;
-        }, 120);
-
-        setTimeout(() => {
-            clearInterval(interval);
-            flash.style.opacity = "0";
-        }, 2500);
-
-    }, 1500);
+        clearInterval(interval);
+        flash.style.opacity = "0";
+    }, 2000);
 }
 </script>
-
-</body>
-</html>
