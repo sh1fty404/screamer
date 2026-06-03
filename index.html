@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тест</title>
+</head>
+<body style="text-align:center; font-family:Arial;">
+
+<h1>Тест на внимательность</h1>
+<p>Нажми кнопку и смотри в центр экрана.</p>
+
+<button onclick="start()">Начать</button>
+
+<!-- звук оставляем всегда -->
+<audio id="sound" src="konik.mp3"></audio>
+
+<script>
+function start() {
+    const sound = document.getElementById("sound");
+
+    // ВАЖНО: запускаем звук сразу по клику (это разрешено браузером)
+    sound.play();
+
+    document.body.innerHTML = "<h1>Смотри внимательно...</h1>";
+
+    setTimeout(() => {
+        document.body.innerHTML =
+        "<img src='konina.jpg' style='width:100vw; height:100vh; object-fit:cover;'>";
+    }, 5000);
+}
+</script>
+
+</body>
+</html>
