@@ -4,6 +4,60 @@
     <title>Тест</title>
 
     <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            text-align: center;
+            color: white;
+
+            /* фон */
+            background: url("background.jpg") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* затемнение, чтобы текст читался */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.6);
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 60px;
+            margin-top: 120px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .buttons {
+            position: relative;
+            z-index: 1;
+            margin-top: 40px;
+        }
+
+        button {
+            font-size: 25px;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .btn1 {
+            background: red;
+            color: white;
+        }
+
+        .btn2 {
+            background: black;
+            color: white;
+        }
+
         #flash {
             position: fixed;
             top: 0;
@@ -13,34 +67,46 @@
             background: red;
             opacity: 0;
             pointer-events: none;
+            z-index: 999;
+        }
+
+        #img {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
     </style>
 </head>
 
-<body style="text-align:center; font-family:Arial;">
+<body>
 
-<h1 id="text">Тест на внимательность</h1>
-<p>Нажми кнопку и смотри в центр экрана.</p>
+<div class="overlay"></div>
 
-<button onclick="start()">Начать</button>
+<h1>ТЕКСТ</h1>
+
+<div class="buttons">
+    <button class="btn1" onclick="start()">Смотреть</button>
+    <button class="btn2" onclick="start()">Выйти</button>
+</div>
 
 <div id="flash"></div>
 
 <audio id="sound" src="konik.mp3" preload="auto"></audio>
 
-<img id="img" style="display:none; width:100vw; height:100vh; object-fit:cover;">
+<img id="img">
 
 <script>
 function start() {
     const sound = document.getElementById("sound");
     const img = document.getElementById("img");
     const flash = document.getElementById("flash");
-    const text = document.getElementById("text");
 
-    // fullscreen (ТОЛЬКО после клика — иначе не работает)
     document.documentElement.requestFullscreen?.();
-
-    text.style.display = "none";
 
     setTimeout(() => {
         img.src = "konina.jpg";
@@ -49,10 +115,9 @@ function start() {
         sound.currentTime = 0;
         sound.play();
 
-        // мигающий красный экран
         let on = false;
         let interval = setInterval(() => {
-            flash.style.opacity = on ? "0.6" : "0";
+            flash.style.opacity = on ? "0.7" : "0";
             on = !on;
         }, 120);
 
@@ -61,7 +126,7 @@ function start() {
             flash.style.opacity = "0";
         }, 2500);
 
-    }, 4000);
+    }, 1500);
 }
 </script>
 
