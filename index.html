@@ -1,74 +1,66 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>Тест</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            text-align: center;
-            color: white;
+```
+<style>
+    body {
+        margin: 0;
+        font-family: Arial;
+        text-align: center;
+        color: white;
 
-            background: url("background.jpg") no-repeat center center fixed;
-            background-size: cover;
-        }
+        background: url("background.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
 
-        h1 {
-            font-size: 60px;
-            margin-top: 120px;
-            position: relative;
-            z-index: 1;
-        }
+    h1 {
+        font-size: 60px;
+        margin-top: 120px;
+        position: relative;
+        z-index: 1;
+    }
 
-        .buttons {
-            position: relative;
-            z-index: 1;
-            margin-top: 40px;
-        }
+    .buttons {
+        position: relative;
+        z-index: 1;
+        margin-top: 40px;
+    }
 
-        button {
-            font-size: 25px;
-            padding: 15px 30px;
-            margin: 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-        }
+    button {
+        font-size: 25px;
+        padding: 15px 30px;
+        margin: 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+    }
 
-        .btn1 {
-            background: red;
-            color: white;
-        }
+    .btn1 {
+        background: red;
+        color: white;
+    }
 
-        .btn2 {
-            background: black;
-            color: white;
-        }
+    .btn2 {
+        background: black;
+        color: white;
+    }
 
-        #flash {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: red;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 999;
-        }
+    #img {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+</style>
+```
 
-        #img {
-            display: none;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-    </style>
 </head>
 
 <body>
@@ -80,8 +72,6 @@
     <button class="btn2" onclick="start()">Выйти</button>
 </div>
 
-<div id="flash"></div>
-
 <audio id="sound" src="konik.mp3" preload="auto"></audio>
 
 <img id="img">
@@ -90,7 +80,6 @@
 function start() {
     const sound = document.getElementById("sound");
     const img = document.getElementById("img");
-    const flash = document.getElementById("flash");
 
     document.documentElement.requestFullscreen?.();
 
@@ -100,16 +89,16 @@ function start() {
     sound.currentTime = 0;
     sound.play();
 
-    let on = false;
+    let visible = true;
 
     let interval = setInterval(() => {
-        flash.style.opacity = on ? "0.8" : "0";
-        on = !on;
-    }, 100); // быстрее и заметнее
+        img.style.visibility = visible ? "hidden" : "visible";
+        visible = !visible;
+    }, 100);
 
     setTimeout(() => {
         clearInterval(interval);
-        flash.style.opacity = "0";
+        img.style.visibility = "visible";
     }, 2000);
 }
 </script>
