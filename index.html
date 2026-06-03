@@ -5,6 +5,7 @@
     <style>
         body {
             margin: 0;
+            padding: 0;
             font-family: Arial;
             text-align: center;
             color: white;
@@ -13,84 +14,97 @@
             overflow: hidden;
         }
         h1 {
-            font-size: 60px;
-            margin-top: 120px;
-            text-shadow: 0 0 20px red, 0 0 40px red;
-        }
-        .buttons {
-            margin-top: 40px;
+            font-size: 55px;
+            margin-top: 100px;
+            text-shadow: 0 0 30px red;
         }
         button {
             font-size: 28px;
-            padding: 18px 40px;
-            margin: 12px;
+            padding: 18px 45px;
+            margin: 15px;
             border: none;
-            cursor: pointer;
             border-radius: 12px;
             font-weight: bold;
+            cursor: pointer;
         }
-        .btn1 {
-            background: linear-gradient(#ff0000, #aa0000);
-            color: white;
-            box-shadow: 0 0 20px red;
-        }
-        .btn2 {
-            background: black;
-            color: white;
-        }
+        .btn1 { background: #ff0000; box-shadow: 0 0 25px red; }
+        .btn2 { background: #111; }
 
         #img {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100vw;
             height: 100vh;
             object-fit: cover;
             z-index: 1000;
-            animation: flicker 0.08s infinite alternate;
         }
 
-        @keyframes flicker {
-            0%   { opacity: 1; }
-            10%  { opacity: 0.15; }
-            20%  { opacity: 0.9; }
-            35%  { opacity: 0.1; }
-            50%  { opacity: 0.85; }
-            65%  { opacity: 0.2; }
-            80%  { opacity: 0.95; }
-            100% { opacity: 0.3; }
+        #flash {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2000;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <h1>ЧИТЫ В БРАВЛ СТАРС БЕСПЛАТНО!</h1>
-    <div class="buttons">
-        <button class="btn1" onclick="start()">Скачать</button>
-        <button class="btn2" onclick="start()">Нет спасибо</button>
+    <h1>ЧИТЫ В БРАВЛ СТАРС БЕСПЛАТНО СУКА!</h1>
+    <div>
+        <button class="btn1" onclick="start()">СКАЧАТЬ НАХУЙ</button>
+        <button class="btn2" onclick="start()">ВЫЙТИ ИЗ ИГРЫ</button>
     </div>
 
     <audio id="sound" src="konik.mp3" preload="auto"></audio>
     <img id="img" src="konina.jpg">
+    <div id="flash"></div>
 
 <script>
 function start() {
     const sound = document.getElementById("sound");
     const img = document.getElementById("img");
+    const flash = document.getElementById("flash");
 
-    // Полноэкранный режим, сука
     document.documentElement.requestFullscreen?.();
-
-    img.style.display = "block";
     
-    // Перезапускаем звук
+    img.style.display = "block";
+    flash.style.display = "block";
+    
     sound.currentTime = 0;
     sound.play().catch(() => {});
 
-    // Через 3 секунды можно вырубить если хочешь, но пусть бесит
+    let phase = 0;
+
+    const strobe = setInterval(() => {
+        phase++;
+
+        if (phase % 4 === 0) {           // картинка
+            img.style.opacity = "1";
+            flash.style.background = "transparent";
+        } 
+        else if (phase % 4 === 1) {      // БЕЛЫЙ
+            img.style.opacity = "0.3";
+            flash.style.background = "white";
+        } 
+        else if (phase % 4 === 2) {      // картинка
+            img.style.opacity = "1";
+            flash.style.background = "transparent";
+        } 
+        else {                           // ЧЁРНЫЙ
+            img.style.opacity = "0.2";
+            flash.style.background = "black";
+        }
+    }, 70); // скорость мигания, чем меньше — тем быстрее
+
+    // Авто-вырубка через 8 секунд чтобы не сдох совсем
     setTimeout(() => {
-        img.style.animation = "flicker 0.05s infinite alternate";
-    }, 300);
+        clearInterval(strobe);
+        flash.style.background = "transparent";
+        img.style.opacity = "1";
+    }, 8000);
 }
 </script>
 </body>
