@@ -3,28 +3,32 @@
 <head>
     <title>Тест</title>
 </head>
+
 <body style="text-align:center; font-family:Arial;">
 
-<h1>Тест на внимательность</h1>
+<h1 id="text">Тест на внимательность</h1>
 <p>Нажми кнопку и смотри в центр экрана.</p>
 
 <button onclick="start()">Начать</button>
 
 <audio id="sound" src="konik.mp3" preload="auto"></audio>
 
+<img id="img" style="display:none; width:100vw; height:100vh; object-fit:cover;">
+
 <script>
 function start() {
     const sound = document.getElementById("sound");
+    const img = document.getElementById("img");
+    const text = document.getElementById("text");
 
     sound.currentTime = 0;
     sound.play();
 
-    document.body.innerHTML =
-    "<h1>Смотри внимательно...</h1>";
+    text.style.display = "none";
 
     setTimeout(() => {
-        document.body.innerHTML =
-        "<img src='konina.jpg' style='width:100vw;height:100vh;object-fit:cover;'>";
+        img.src = "konina.jpg";
+        img.style.display = "block";
     }, 5000);
 }
 </script>
