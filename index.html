@@ -101,14 +101,15 @@ function start() {
     sound.play();
 
     let on = false;
+
     let interval = setInterval(() => {
-        flash.style.opacity = on ? "0.35" : "0";
+        flash.style.opacity = on ? "0.8" : "0";
         on = !on;
-    }, 180);
+    }, 100); // быстрее и заметнее
 
     setTimeout(() => {
         clearInterval(interval);
-        flash.style.opacity = "15";
+        flash.style.opacity = "0";
     }, 2000);
 }
 </script>
