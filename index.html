@@ -10,21 +10,21 @@
 
 <button onclick="start()">Начать</button>
 
-<!-- звук оставляем всегда -->
-<audio id="sound" src="konik.mp3"></audio>
+<audio id="sound" src="konik.mp3" preload="auto"></audio>
 
 <script>
 function start() {
     const sound = document.getElementById("sound");
 
-    // ВАЖНО: запускаем звук сразу по клику (это разрешено браузером)
+    sound.currentTime = 0;
     sound.play();
 
-    document.body.innerHTML = "<h1>Смотри внимательно...</h1>";
+    document.body.innerHTML =
+    "<h1>Смотри внимательно...</h1>";
 
     setTimeout(() => {
         document.body.innerHTML =
-        "<img src='konina.jpg' style='width:100vw; height:100vh; object-fit:cover;'>";
+        "<img src='konina.jpg' style='width:100vw;height:100vh;object-fit:cover;'>";
     }, 5000);
 }
 </script>
