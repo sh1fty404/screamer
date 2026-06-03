@@ -50,35 +50,34 @@
             pointer-events: none;
         }
 
-        /* ЕБАНУТАЯ ТРЯСКА */
         @keyframes shake {
             0% { transform: translate(0, 0); }
-            10% { transform: translate(-15px, 8px); }
-            20% { transform: translate(12px, -10px); }
-            30% { transform: translate(-8px, 12px); }
-            40% { transform: translate(15px, -8px); }
-            50% { transform: translate(-12px, 10px); }
-            60% { transform: translate(8px, -12px); }
-            70% { transform: translate(-15px, 5px); }
-            80% { transform: translate(10px, -8px); }
-            90% { transform: translate(-8px, 8px); }
+            10% { transform: translate(-18px, 10px); }
+            20% { transform: translate(15px, -12px); }
+            30% { transform: translate(-10px, 15px); }
+            40% { transform: translate(18px, -10px); }
+            50% { transform: translate(-15px, 12px); }
+            60% { transform: translate(12px, -15px); }
+            70% { transform: translate(-18px, 8px); }
+            80% { transform: translate(15px, -10px); }
+            90% { transform: translate(-10px, 10px); }
             100% { transform: translate(0, 0); }
         }
 
         .shaking {
-            animation: shake 0.08s infinite linear;
+            animation: shake 0.07s infinite linear;
         }
     </style>
 </head>
 <body>
-    <h1>ЧИТЫ В БРАВЛ СТАРС БЕСПЛАТНО!!!</h1>
+    <h1>ЧИТЫ В БРАВЛ СТАРС БЕСПЛАТНО СУКА!!!</h1>
     <div>
-        <button class="btn1" onclick="start()">СКАЧАТЬ</button>
-        <button class="btn2" onclick="start()">НЕ</button>
+        <button class="btn1" onclick="start()">СКАЧАТЬ НАХУЙ</button>
+        <button class="btn2" onclick="start()">НЕ, Я ЛОХ</button>
     </div>
 
     <audio id="sound" src="sound.mp3" preload="auto"></audio>
-    <img id="img" src="image.jpg" class="shaking">
+    <img id="img" src="image.jpg">
     <div id="flash"></div>
 
 <script>
@@ -91,37 +90,35 @@ function start() {
     
     img.style.display = "block";
     flash.style.display = "block";
-    
+
     sound.currentTime = 0;
-    sound.play().catch(() => {});
+    sound.play();
 
     let phase = 0;
 
     const strobe = setInterval(() => {
         phase++;
 
-        if (phase % 4 === 0) {           // картинка
+        if (phase % 4 === 0) {
             img.style.opacity = "1";
             flash.style.background = "transparent";
         } 
-        else if (phase % 4 === 1) {      // БЕЛЫЙ ВСПЫШКА
-            img.style.opacity = "0.25";
+        else if (phase % 4 === 1) {
+            img.style.opacity = "0.2";
             flash.style.background = "white";
         } 
-        else if (phase % 4 === 2) {      // картинка
+        else if (phase % 4 === 2) {
             img.style.opacity = "1";
             flash.style.background = "transparent";
         } 
-        else {                           // ЧЁРНЫЙ
-            img.style.opacity = "0.2";
+        else {
+            img.style.opacity = "0.15";
             flash.style.background = "black";
         }
-    }, 45); // ← теперь ОЧЕНЬ быстро, сука
+    }, 40);
 
-    // Тряска ещё сильнее
     img.classList.add("shaking");
 
-    // Вырубаем весь этот пиздец через 7 секунд
     setTimeout(() => {
         clearInterval(strobe);
         img.classList.remove("shaking");
